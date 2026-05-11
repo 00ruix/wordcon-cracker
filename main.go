@@ -6,25 +6,32 @@ import (
 	"math/rand"
 	"os"
 	"slices"
+	"strconv"
 	"strings"
 
 	"github.com/fatih/color"
 )
 
-//Variables
+//Global Variables
 
 var lettersArray []string
 var askForLetter bool = true
 var emptySpace int32 = 500
 var tried []string
 
+var reRolls int32 = 0
+
 //**
 
 func main() {
+	for i := 64; i < 123; i++ {
+		fmt.Println(" \n")
+	}
 	getLetter()
 	askForTries()
 	guessWord()
 	color.Blue("Finished!")
+	fmt.Println(strconv.Itoa(int(reRolls)))
 
 }
 
@@ -82,6 +89,10 @@ func guessWord() {
 					return
 				}
 
+			} else {
+				//If the random word was already guessed, roll it again.
+				i--
+				reRolls++
 			}
 
 		})
